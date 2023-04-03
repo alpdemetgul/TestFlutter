@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const Camera_Page()));
+                        builder: (context) => const CameraApp()));
               },
               child: const Text('Camera'),
             ),

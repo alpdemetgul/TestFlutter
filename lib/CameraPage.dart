@@ -1,63 +1,52 @@
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
 
-late List<CameraDescription> _cameras;
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  _cameras = await availableCameras();
-  runApp(const Camera_Page());
-}
-
-/// CameraApp is the Main Application.
-class Camera_Page extends StatefulWidget {
-  /// Default Constructor
-  const Camera_Page({Key? key}) : super(key: key);
+class CameraApp extends StatefulWidget {
+  const CameraApp({Key? key}) : super(key: key);
 
   @override
-  State<Camera_Page> createState() => _CameraAppState();
+  State<CameraApp> createState() => _CameraAppState();
 }
 
-class _CameraAppState extends State<Camera_Page> {
-  late CameraController controller;
+class _CameraAppState extends State<CameraApp> {
+  late List<CameraDescription> cameras;
+  late CameraController cameraController;
 
   @override
   void initState() {
+    startCamera();
     super.initState();
-    controller = CameraController(_cameras[0], ResolutionPreset.max);
-    controller.initialize().then((_) {
+  }
+
+  void startCamera() async {
+    cameras = await availableCameras();
+    cameraController =
+        CameraController(cameras[0], ResolutionPreset.high, enableAudio: false);
+    await cameraController.initialize().then((value) {
       if (!mounted) {
         return;
       }
       setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // Handle access errors here.
-            break;
-          default:
-            // Handle other errors here.
-            break;
-        }
-      }
+    }).catchError((e) {
+      print(e);
     });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    cameraController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!controller.value.isInitialized) {
+    if (cameraController.value.isInitialized) {
+      return Scaffold(
+          body: Stack(
+        children: [CameraPreview(cameraController)],
+      ));
+    } else {
       return Container();
     }
-    return MaterialApp(
-      home: CameraPreview(controller),
-    );
   }
 }
