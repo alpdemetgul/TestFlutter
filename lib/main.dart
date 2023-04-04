@@ -96,37 +96,45 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               style: flatButtonStyle,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const CameraApp()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CameraApp()));
               },
               child: const Text('Camera'),
             ),
             TextButton(
               style: flatButtonStyle,
               onPressed: null,
-              child: const Text('TextButton'),
+              child: const Text('GeoLocation'),
             ),
             TextButton(
               style: flatButtonStyle,
               onPressed: null,
-              child: const Text('TextButton'),
+              child: const Text('Remind me'),
             ),
             TextButton(
               style: flatButtonStyle,
               onPressed: null,
-              child: const Text('TextButton'),
+              child: const Text('Microfone'),
             ),
             TextButton(
               style: flatButtonStyle,
               onPressed: null,
-              child: const Text('TextButton'),
+              child: const Text('File Select'),
             ),
             TextButton(
               style: flatButtonStyle,
               onPressed: null,
-              child: const Text('TextButton'),
+              child: const Text('AutoFill'),
+            ),
+            TextButton(
+              style: flatButtonStyle,
+              onPressed: null,
+              child: const Text('Test'),
+            ),
+            TextButton(
+              style: flatButtonStyle,
+              onPressed: null,
+              child: const Text('Test'),
             ),
           ],
         ),
