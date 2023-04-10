@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colarx/biometrics.dart';
 import 'package:flutter_colarx/geo_location.dart';
 import 'CameraPage.dart';
 
@@ -63,7 +64,12 @@ class MyHomePage extends StatelessWidget {
             ),
             TextButton(
               style: flatButtonStyle,
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const Biometrics()));
+              },
               child: const Text('Remind me'),
             ),
             TextButton(
