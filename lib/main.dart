@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colarx/autofill.dart';
 import 'package:flutter_colarx/biometrics.dart';
+import 'package:flutter_colarx/file_uploader.dart';
 import 'package:flutter_colarx/geo_location.dart';
 import 'package:flutter_colarx/microphone.dart';
+import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
 
 void main() {
@@ -43,73 +45,87 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CameraApp()));
-              },
-              child: const Text('Camera'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const GeoLocation()));
-              },
-              child: const Text('GeoLocation'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Biometrics()));
-              },
-              child: const Text('Remind me'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => const Microphone()));
-              },
-              child: const Text('Microfone'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: null,
-              child: const Text('File Select'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AutoFill()));
-              },
-              child: const Text('AutoFill'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: null,
-              child: const Text('Test'),
-            ),
-            TextButton(
-              style: flatButtonStyle,
-              onPressed: null,
-              child: const Text('Test'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CameraApp()));
+                },
+                child: const Text('Camera'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GeoLocation()));
+                },
+                child: const Text('GeoLocation'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Biometrics()));
+                },
+                child: const Text('Remind me'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const Microphone()));
+                },
+                child: const Text('Microfone'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FileUpload()));
+                },
+                child: const Text('File Select'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AutoFill()));
+                },
+                child: const Text('AutoFill'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OrientationScreen()));
+                },
+                child: const Text('Orientation'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: null,
+                child: const Text('Test'),
+              ),
+            ],
+          ),
         ),
       ),
     );
