@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colarx/autofill.dart';
 import 'package:flutter_colarx/biometrics.dart';
 import 'package:flutter_colarx/geo_location.dart';
+import 'package:flutter_colarx/microphone.dart';
 import 'CameraPage.dart';
 
 void main() {
@@ -74,7 +76,12 @@ class MyHomePage extends StatelessWidget {
             ),
             TextButton(
               style: flatButtonStyle,
-              onPressed: null,
+              onPressed: () {
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => const Microphone()));
+              },
               child: const Text('Microfone'),
             ),
             TextButton(
@@ -84,7 +91,12 @@ class MyHomePage extends StatelessWidget {
             ),
             TextButton(
               style: flatButtonStyle,
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AutoFill()));
+              },
               child: const Text('AutoFill'),
             ),
             TextButton(
