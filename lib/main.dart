@@ -8,6 +8,7 @@ import 'package:flutter_colarx/login_screen.dart';
 import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
+import 'package:flutter_colarx/share.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -147,6 +148,16 @@ class MyHomePage extends StatelessWidget {
                           builder: (context) => const LoginScreen()));
                 },
                 child: const Text('Login'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ShareWidget()));
+                },
+                child: const Text('Share'),
               ),
             ],
           ),
