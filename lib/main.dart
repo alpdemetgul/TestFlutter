@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CameraPage.dart';
+import 'auto_fill.dart';
 
 void main() {
   runApp(const MyApp());
@@ -49,8 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
   @override
   Widget build(BuildContext context) {
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
@@ -123,7 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               style: flatButtonStyle,
-              onPressed: null,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AutoFill()));
+              },
               child: const Text('AutoFill'),
             ),
             TextButton(
