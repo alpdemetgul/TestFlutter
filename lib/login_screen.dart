@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_colarx/screens/login_page.dart';
 import 'package:flutter_colarx/screens/register_page.dart';
 

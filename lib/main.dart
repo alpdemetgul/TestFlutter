@@ -6,6 +6,7 @@ import 'package:flutter_colarx/file_uploader.dart';
 import 'package:flutter_colarx/geo_location.dart';
 import 'package:flutter_colarx/login_screen.dart';
 import 'package:flutter_colarx/microphone.dart';
+import 'package:flutter_colarx/notification.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
 import 'package:flutter_colarx/share.dart';
@@ -13,21 +14,18 @@ import 'package:flutter_colarx/share.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
 
-  print("Handling a background message: ${message.messageId}");
-}
+//   print("Handling a background message: ${message.messageId}");
+// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging.instance
-      .getToken()
-      .then((value) => {print('FCM Token:  ' + value.toString())});
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(MyApp());
 }
 
@@ -158,6 +156,16 @@ class MyHomePage extends StatelessWidget {
                           builder: (context) => const ShareWidget()));
                 },
                 child: const Text('Share'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()));
+                },
+                child: const Text('Notification'),
               ),
             ],
           ),
