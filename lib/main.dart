@@ -7,6 +7,7 @@ import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
 import 'package:flutter_colarx/share.dart';
+import 'voice_record.dart';
 
 void main() {
   runApp(const MyApp());
@@ -135,6 +136,16 @@ class MyHomePage extends StatelessWidget {
                 },
                 child: const Text('Share'),
               ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VoiceRecordWidget()));
+                },
+                child: const Text('VoiceRecord'),
+              )
             ],
           ),
         ),
