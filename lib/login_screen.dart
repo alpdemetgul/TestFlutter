@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_colarx/screens/login_page.dart';
+import 'package:flutter_colarx/screens/register_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -57,10 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void handleClickRegister() async {
     try {
-      var _userCredentials = await _auth.createUserWithEmailAndPassword(
-          email: _email, password: _password);
-      var _user = _userCredentials.user;
-      print(_user.toString());
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const RegisterPage()));
     } catch (e) {
       print(e.toString());
     }
