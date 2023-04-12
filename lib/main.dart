@@ -6,7 +6,6 @@ import 'package:flutter_colarx/geo_location.dart';
 import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
-import 'auto_fill.dart';
 
 void main() {
   runApp(const MyApp());
