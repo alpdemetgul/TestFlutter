@@ -3,12 +3,20 @@ import 'package:flutter_colarx/autofill.dart';
 import 'package:flutter_colarx/biometrics.dart';
 import 'package:flutter_colarx/file_uploader.dart';
 import 'package:flutter_colarx/geo_location.dart';
+import 'package:flutter_colarx/login_screen.dart';
 import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -121,8 +129,13 @@ class MyHomePage extends StatelessWidget {
               ),
               TextButton(
                 style: flatButtonStyle,
-                onPressed: null,
-                child: const Text('Test'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                },
+                child: const Text('Login'),
               ),
             ],
           ),
