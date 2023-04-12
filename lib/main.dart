@@ -6,6 +6,7 @@ import 'package:flutter_colarx/geo_location.dart';
 import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/orientation.dart';
 import 'CameraPage.dart';
+import 'package:flutter_colarx/share.dart';
 
 void main() {
   runApp(const MyApp());
@@ -123,6 +124,16 @@ class MyHomePage extends StatelessWidget {
                 style: flatButtonStyle,
                 onPressed: null,
                 child: const Text('Test'),
+              ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ShareWidget()));
+                },
+                child: const Text('Share'),
               ),
             ],
           ),
