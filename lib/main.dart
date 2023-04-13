@@ -8,17 +8,18 @@ import 'package:flutter_colarx/login_screen.dart';
 import 'package:flutter_colarx/microphone.dart';
 import 'package:flutter_colarx/notification.dart';
 import 'package:flutter_colarx/orientation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'CameraPage.dart';
 import 'package:flutter_colarx/share.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   await Firebase.initializeApp();
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
 
-//   print("Handling a background message: ${message.messageId}");
-// }
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,9 +45,92 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    'This channel is used for important notifications.', // description
+    importance: Importance.max,
+  );
+
+  static const AndroidNotificationDetails androidNotificationDetails =
+      AndroidNotificationDetails(
+          'high_importance_channel',
+          'High Importance Notifications',
+          'This channel is used for important notifications.',
+          importance: Importance.max,
+          priority: Priority.high,
+          ticker: 'ticker');
+
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  final NotificationDetails notificationDetails =
+      NotificationDetails(android: androidNotificationDetails);
+
+  void localNotification() async {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', notificationDetails,
+        payload: 'item x');
+  }
+
+  void notification() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
+
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channel.description,
+                icon: android.smallIcon,
+              ),
+            ));
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    notification();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +144,7 @@ class MyHomePage extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: Center(
         child: SingleChildScrollView(
