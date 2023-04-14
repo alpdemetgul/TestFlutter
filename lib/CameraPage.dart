@@ -1035,9 +1035,29 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
 }
 
 /// CameraApp is the Main Application.
-class CameraApp extends StatelessWidget {
+class CameraApp extends StatefulWidget {
   /// Default Constructor
   const CameraApp({super.key});
+
+  @override
+  State<CameraApp> createState() => _CameraAppState();
+}
+
+class _CameraAppState extends State<CameraApp> {
+  void function1() async {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      _cameras = await availableCameras();
+    } on CameraException catch (e) {
+      _logError(e.code, e.description);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    function1();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1049,13 +1069,13 @@ class CameraApp extends StatelessWidget {
 
 List<CameraDescription> _cameras = <CameraDescription>[];
 
-Future<void> main() async {
-  // Fetch the available cameras before initializing the app.
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    _cameras = await availableCameras();
-  } on CameraException catch (e) {
-    _logError(e.code, e.description);
-  }
-  runApp(const CameraApp());
-}
+// Future<void> main() async {
+//   Fetch the available cameras before initializing the app.
+//   try {
+//     WidgetsFlutterBinding.ensureInitialized();
+//     _cameras = await availableCameras();
+//   } on CameraException catch (e) {
+//     _logError(e.code, e.description);
+//   }
+//   runApp(const CameraApp());
+// }

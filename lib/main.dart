@@ -11,6 +11,7 @@ import 'package:flutter_colarx/orientation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'CameraPage.dart';
 import 'package:flutter_colarx/share.dart';
+import 'voice_record.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -251,6 +252,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 child: const Text('Notification'),
               ),
+              TextButton(
+                style: flatButtonStyle,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VoiceRecordWidget()));
+                },
+                child: const Text('VoiceRecord'),
+              )
             ],
           ),
         ),
